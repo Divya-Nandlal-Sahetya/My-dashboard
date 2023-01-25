@@ -1,0 +1,85 @@
+type Query {
+  gradebook(emailid: String!): [gradebook]
+
+  gradebooks: [gradebook]
+
+  teacher(id: ID!): Person
+
+  teachers(limit: Int, offset: Int, sort: String): [Person]!
+
+  student(emailid: String!): Person
+
+  students(limit: Int, offset: Int, sort: String): [Person]!
+
+  subject(emailid: String!): [Subject]
+}
+
+type Mutation {
+  personCreate(personInput: personCreateInput): Person
+  personDelete(id: ID!): Boolean
+  personUpdate(id: ID!, personInput: personUpdateInput): Person
+
+  gradebookCreate(gradebookInput: gradebookCreateInput): gradebook
+  gradebookDelete(id: ID!): Boolean
+  gradebookUpdate(id: ID!, gradebookInput: gradebookUpdateInput): gradebook
+}
+
+enum roleEnum {
+  teacher
+  student
+  admin
+}
+
+input personCreateInput {
+  fname: String
+  lname: String
+  role: roleEnum
+  gpa: Float
+  emailid: String
+}
+
+input personUpdateInput {
+  fname: String
+  lname: String
+  is_active: Boolean
+  gpa: Float
+}
+
+type Person {
+  is_active: Boolean
+  fname: String
+  lname: String
+  name: String
+  id: ID
+  role: roleEnum
+  gpa: Float
+  emailid: String
+}
+
+input gradebookCreateInput {
+  subject: String
+  grade: String
+  gpa: Float
+  emailid: String
+}
+
+input gradebookUpdateInput {
+  id: ID!
+  subject: String
+  grade: String
+  gpa: Float
+  emailid: String
+}
+
+type gradebook {
+  emailid: String
+  subject: String
+  grade: String
+  gpa: Float
+}
+
+type Subject {
+  code: String
+  name: String
+  Instructor: String
+}
