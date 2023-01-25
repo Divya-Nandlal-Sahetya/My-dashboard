@@ -1,2 +1,2 @@
-# EE547
+# My Customised Dashboard
 EE547 Project
